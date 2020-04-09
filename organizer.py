@@ -71,9 +71,8 @@ def safeState(files_hashes,files_duplicates,file_path):
 def main():
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
-                                     description='Sort files into media, screenshots, memes and others, while deleting duplicates.')
-    parser.add_argument('src_dir', type=str, help='Source directory')
-    parser.add_argument('dest_dir', type=str, help='Destination directory (it MUST be empty)')
+                                     description='This script copies files from the source folder to the destination one. It removes duplicates and organize the files in 5 different folders (based by the extension and aspect ratio, if needed): camera, memes, more_media, screenshots and others. To check the equality of 2 files it deletes the metadata and perform a md5 hash, which stores it to make later checks.')
+    parser.add_argument('dest_dir', type=str, help='Destination directory')
     parser.add_argument('-r', '--recursive', action='store_true', help='Search src_dir recursively')
     parser.add_argument('-n', '--new', action='store_true', help='If status.txt exists from a previous failed execution, force to start over again.')
 
