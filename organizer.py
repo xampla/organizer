@@ -42,15 +42,15 @@ def detectFileType(path):
             ratio = 0
 
         if 1.3 <= ratio <= 1.4:
-            return "camera/"
+            return "camera"
         elif 1.6 <= ratio <= 2.3:
-            return "screenshots/"
+            return "screenshots"
         else:
-            return "memes/"
+            return "memes"
     elif path.lower().endswith(tuple(other_media_type)):
-        return "more_media/"
+        return "more_media"
     else:
-        return "others/"
+        return "others"
 
 def createDestFolders(path):
     os.mkdir(path+'camera')
@@ -83,7 +83,7 @@ def main():
     files_duplicates = {}
     source_dir = args.src_dir
     dest_dir = args.dest_dir
-    tmp_dir = dest_dir+"tmp/"
+    tmp_dir = os.path.join(dest_dir, "tmp")
 
     num_files = len([file for file in os.listdir(source_dir)
                                 if os.path.isfile(os.path.join(source_dir, file))])
@@ -114,20 +114,20 @@ def main():
                 if (recovery and file_path == last_file) or current:
                     current = True
                     if not file.startswith('.'):
-                        tmp_path = tmp_dir+file
+                        tmp_path = os.path.join(tmp_dir, file)
                         shutil.copy(file_path, tmp_path)
                         removeExif(tmp_path)
                         hash = getMD5(tmp_path)
                         if hash not in files_hashes:
                             files_hashes[hash] = file_path
                             file_type = detectFileType(file_path)
-                            if not os.path.exists(dest_dir+file_type+file):
-                                final_path = dest_dir+file_type+file
+                            if not os.path.exists(os.path.join(dest_dir, file_type, file)):
+                                final_path = os.path.join(dest_dir, file_type, file)
                                 shutil.copy2(file_path, final_path)
                             else:
                                 now = str(str(datetime.datetime.now())[:19].replace(":","_"))
                                 base, extension = os.path.splitext(file)
-                                shutil.copy2(file_path, dest_dir+file_type+base+now+extension)
+                                shutil.copy2(file_path, os.path.join(dest_dir, file_type, base+now+extension))
                         else:
                             original_path = files_hashes[hash]
                             if original_path in files_duplicates:
