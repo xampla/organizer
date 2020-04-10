@@ -1,6 +1,6 @@
 # ORGANIZER
 
-This script *copies* files from the source folder to the destination one. It *removes* duplicates and organize the files in 5 different folders (based by the extension and aspect ratio, if needed): camera, memes, more_media, screenshots and others. To check the equality of 2 files it deletes the metadata and perform a md5 hash which stores it to make later checks.
+This script *copies* files from the source folder to the destination one. Duplicates won't be copied while it organizes the files in 5 different folders (based by the extension and aspect ratio, if needed): camera, memes, more_media, screenshots and others. To check the equality of 2 files it deletes the metadata and perform a md5 hash which stores it to make later checks.
 
 ## Getting Started
 
